@@ -10,7 +10,7 @@
       "type": "string"
     },
     "allowUsageAnalytics": {
-      "defaultValue": true,
+      "defaultValue": false,
       "metadata": {
         "description": "This deployment can send anonymous statistics to F5 to help us determine how to improve our solutions. If you select **false** statistics are not sent."
       },
@@ -24,27 +24,28 @@
       "type": "string"
     },
     "uniqueString": {
+      "defaultValue": "RSF5",
       "metadata": {
         "description": "REQUIRED - A prefix that will be used to name template resources. Because some resources require globally unique names, we recommend using a unique value."
       },
       "type": "string"
     },
     "bigIpHostname01": {
-      "defaultValue": "failover01.local",
+      "defaultValue": "rs-asm-01-test.local",
       "metadata": {
         "description": "Supply the hostname you would like to use for the BIG-IP instance. The hostname must contain fewer than 63 characters."
       },
       "type": "string"
     },
     "bigIpHostname02": {
-      "defaultValue": "failover02.local",
+      "defaultValue": "rs-asm-02-test.local",
       "metadata": {
         "description": "Supply the hostname you would like to use for the BIG-IP instance. The hostname must contain fewer than 63 characters."
       },
       "type": "string"
     },
     "bigIpImage": {
-      "defaultValue": "f5-networks:f5-big-ip-best:f5-big-best-plus-hourly-25mbps:16.1.303000",
+      "defaultValue": "f5-networks:f5-big-ip-byol:f5-big-all-2slot-byol:16.1.303000",
       "metadata": {
         "description": "2 formats accepted. URN of the image to use in Azure marketplace or id of custom image. Example URN value: f5-networks:f5-big-ip-byol:f5-big-all-2slot-byol:16.1.303000. You can find the URNs of F5 marketplace images in the README for this template or by running the command: az vm image list --output yaml --publisher f5-networks --all. See https://clouddocs.f5.com/cloud/public/v1/azure/Azure_download.html for information on creating custom BIG-IP image."
       },
@@ -58,14 +59,14 @@
       "type": "string"
     },
     "bigIpLicenseKey01": {
-      "defaultValue": "",
+      "defaultValue": "INDFB-WYOBQ-QSPRJ-NIPHH-ONGRVOX",
       "metadata": {
         "description": "Supply the F5 BYOL license key for BIG-IP instance 01. Leave this parameter blank if deploying the PAYG solution."
       },
       "type": "string"
     },
     "bigIpLicenseKey02": {
-      "defaultValue": "",
+      "defaultValue": "VGUYY-MYYHU-BIHXW-VFXCH-ITQPNTF",
       "metadata": {
         "description": "Supply the F5 BYOL license key for BIG-IP instance 02. Leave this parameter blank if deploying the PAYG solution."
       },
@@ -79,7 +80,7 @@
       "type": "string"
     },
     "bigIpPasswordSecretValue": {
-      "defaultValue": "",
+      "defaultValue": "LjPaA8hy209YRzyEn33S",
       "metadata": {
         "description": "The value to use for the BIG-IP admin password, if a value is not provided for the bigIpPasswordSecretId parameter. This parameter is REQUIRED if bigIpPasswordSecretId is empty."
       },
@@ -93,6 +94,7 @@
       "type": "string"
     },
     "sshKey": {
+      "defaultValue": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCuq2iUS3tiefThokcmR933lbOJJbB9YirztIgg064DfydMGEd9xJRlk+Fkm+QwJ2rrJJXGSVVIg94wukND9ZP3/FZnQrOUozerAX4PYWs1ToWyE+diLzV/EgeEkN+B7wJQ76Vsj/f/HNwb7hfArRuJYgGiCtfevcw/zHFo9HSzzHOHYgMrVpjsYKOcaEUupwpDAR0vxPWXBwVbMc1/jCpIe3n4chWhZqnl/vPw5vL1dSmQ4JuBGdm/JEOw6gxGZmDVsNmXrv5i3SCztauT2BAiIRy02wJG3ZDlvMbN0BoYpr6eR1Wq0dlir+GXXqbQIp4OlI/EvxR+cPyhLED5LMXpMoY1rie8eduFWlAEplUG+mjo9mLZaLYZyDn61lmQjjWys2PHUCjirJzieVzKTRxaJUAm9OMSrS495/5Xtr3Wi+HA3/vmBN2FwFLqRt8xzDhsfcmetP/ydgFehtXjT7IugNP06TcLnb4Og6mSpdx08BJ2zJ/Z7hbks9sIv8BaPvoZxcDi5jfVaBiKVbWsVJYMn0uYlH1JlyAKFAajCBcbs1RXq9Mb+9DzoGX9O8car1cm23sJPFhUlbYRFmYVzNUkiFTEcZc48YlcmMxM84GcpplmT+oKFelR+CbJS9Pz9m0M/VjFuIIJyD97V+EEXx5U3wfH4XXU6kTN5Nnu+w6egQ==",
       "metadata": {
         "description": "REQUIRED - Supply the public key that will be used for SSH authentication to the BIG-IP and application virtual machines."
       },
@@ -120,19 +122,21 @@
       "type": "bool"
     },
     "restrictedSrcAddressMgmt": {
+      "defaultValue": "*",
       "metadata": {
         "description": "REQUIRED - When creating management security group, this field restricts management access to a specific network or address. Enter an IP address or address range in CIDR notation, or asterisk for all sources."
       },
       "type": "string"
     },
     "restrictedSrcAddressApp": {
+      "defaultValue": "*",
       "metadata": {
         "description": "REQUIRED - When creating application security group, this field restricts application access to a specific network or address. Enter an IP address or address range in CIDR notation, or asterisk for all sources."
       },
       "type": "string"
     },
     "restrictedSrcAddressVip": {
-      "metadata": {
+      "defaultValue": "*",
         "description": "REQUIRED - When creating VIP security group, this field restricts VIP access to a specific network or address. Enter an IP address or address range in CIDR notation, or asterisk for all sources."
       },
       "type": "string"
@@ -198,14 +202,14 @@
       "type": "string"
     },
     "bigIpRuntimeInitConfig01": {
-      "defaultValue": "https://raw.githubusercontent.com/F5Networks/f5-azure-arm-templates-v2/v2.8.0.0/examples/failover/bigip-configurations/runtime-init-conf-3nic-payg-instance01-with-app.yaml",
+      "defaultValue": "https://raw.githubusercontent.com/F5Networks/f5-azure-arm-templates-v2/v2.7.0.0/examples/failover/bigip-configurations/runtime-init-conf-3nic-byol-instance01-with-app.yaml",
       "metadata": {
         "description": "Supply a URL to the bigip-runtime-init configuration file in YAML or JSON format, or an escaped JSON string to use for f5-bigip-runtime-init configuration."
       },
       "type": "string"
     },
     "bigIpRuntimeInitConfig02": {
-      "defaultValue": "https://raw.githubusercontent.com/F5Networks/f5-azure-arm-templates-v2/v2.8.0.0/examples/failover/bigip-configurations/runtime-init-conf-3nic-payg-instance02-with-app.yaml",
+      "defaultValue": "https://raw.githubusercontent.com/F5Networks/f5-azure-arm-templates-v2/v2.7.0.0/examples/failover/bigip-configurations/runtime-init-conf-3nic-byol-instance02-with-app.yaml",
       "metadata": {
         "description": "Supply a URL to the bigip-runtime-init configuration file in YAML or JSON format, or an escaped JSON string to use for f5-bigip-runtime-init configuration."
       },
